@@ -111,7 +111,4 @@ contract ChatDapp{
         return allMessages[chatCode];
     }
 
-
-
-
 }
