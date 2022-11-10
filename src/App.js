@@ -1,10 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
-
+import NavBar from "./Components/NavBar"
+import React, {useState, useContext} from 'react';
+import {ChatDappContext} from './Context/ChatDappContext'
 function App() {
+
+  const {title} = useContext(ChatDappContext);
   return (
     <div className="App">
-      App
+      
+      <NavBar/>
+      {title}
     </div>
   );
 }
