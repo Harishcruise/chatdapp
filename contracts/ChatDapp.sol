@@ -21,6 +21,13 @@ contract ChatDapp{
         string msg;
     }
 
+    struct AllUserStruct{
+        string name;
+        address accountAddress;
+    }
+
+    AllUserStruct[] getAllUser;
+
     mapping(address => user) userList;
     mapping(bytes32 => message[]) allMessages;
 
@@ -37,6 +44,7 @@ contract ChatDapp{
         require(checkUserExists(msg.sender)==false, "User Already exist");
         require(bytes(name).length>0,"Username cannot be empty");
         userList[msg.sender].name = name;
+        getAllUser.push(AllUserStruct(name,msg.sender));
     }
 
     //GET username
@@ -109,6 +117,12 @@ contract ChatDapp{
     function readMessage(address friendKey) external view returns(message[] memory){
         bytes32 chatCode = _getChatCode(msg.sender, friendKey);
         return allMessages[chatCode];
+    }
+
+    // Get all User
+
+    function getAllAppUser() public view returns(AllUserStruct[] memory){
+        return getAllUser;
     }
 
 }
