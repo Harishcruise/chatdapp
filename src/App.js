@@ -4,12 +4,12 @@ import React, {useState, useContext} from 'react';
 import {ChatDappContext} from './Context/ChatDappContext'
 function App() {
 
-  const {title} = useContext(ChatDappContext);
+  const {account} = useContext(ChatDappContext);
   return (
-    <div className="App">
+    <div className="">
       
       <NavBar/>
-      {title}
+      {account}
     </div>
   );
 }

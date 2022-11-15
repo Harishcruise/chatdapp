@@ -23,7 +23,7 @@ export const CheckIfWalletConnected = async()=>{
 
 export const connectWallet = async()=>{
     try{
-       if(window.ethereum){
+       if(!window.ethereum){
         return console.log("Install MetaMask");
        }
 
@@ -32,13 +32,15 @@ export const connectWallet = async()=>{
        });
 
        const firstAccount = accounts[0];
+       console.log(firstAccount)
        return firstAccount;
     }catch (error){
         console.log(error);
     }
 }
 
-const fetchContract = (signerOrProvider) => new ethers.Contract(ChatDappABI,ChatDappAddress,signerOrProvider); 
+
+const fetchContract = (signerOrProvider) => new ethers.Contract(ChatDappAddress,ChatDappABI,signerOrProvider); 
 
 export const connectingWithContract = async() =>{
     try{
@@ -46,8 +48,9 @@ export const connectingWithContract = async() =>{
         const connection = await web3modal.connect();
         const provider = new ethers.providers.Web3Provider(connection);
         const signer = provider.getSigner();
+        console.log(signer);
         const contract = fetchContract(signer); 
-
+        console.log(contract);
         return contract;
     } catch(error){
         console.log(error);
